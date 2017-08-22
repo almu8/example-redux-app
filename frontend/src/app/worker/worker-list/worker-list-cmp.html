@@ -1,0 +1,7 @@
+<h2>Workers:</h2>
+
+<ul>
+  <li *ngFor="let worker of workersList$ | async">
+    <a [routerLink]="['/worker', worker.id]">{{worker.name}}</a>
+  </li>
+</ul>

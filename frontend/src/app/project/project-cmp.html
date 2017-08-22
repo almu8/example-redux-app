@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <h2>Projects:</h2>
+    <a *ngFor="let p of projects$ | async"
+       style="margin: 10px"
+       href="/project/{{p.id}}">
+      {{p.name}}
+    </a>
+  </div>
+
+  <div>
+    <h2>Basic info:</h2>
+    <br>
+    Name: {{project?.name}}
+    <br>
+    Workers: {{project?.workers.length}}
+    <br>
+    Description: {{project?.description}}
+    <br>
+  </div>
+
+  <worker-list *ngIf="project" [workers]="project.workers"></worker-list>
+
+  <button (click)="approve()">Approve</button>
+
+</div>
