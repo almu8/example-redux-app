@@ -13,7 +13,7 @@ import { StoreModule } from './store/module';
 import { appRoutes } from './routes';
 import { AppComponent } from './component';
 import {ProjectModule} from "./project/project-module";
-import {InterceptedHttp} from "./interceptor/Intercepter-http";
+import {InterceptedHttp} from "./interceptor/intercepter-http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,9 +31,13 @@ import {InterceptedHttp} from "./interceptor/Intercepter-http";
   providers: [
     {
       provide: Http,
-      useFactory: (xhrBackend: XHRBackend, requestOptions: RequestOptions) => new InterceptedHttp(xhrBackend, requestOptions),
+      useFactory: httpFactory,
       deps: [XHRBackend, RequestOptions]
     }
   ]
 })
 export class AppModule {}
+
+export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
+  return new InterceptedHttp(xhrBackend, requestOptions);
+}
