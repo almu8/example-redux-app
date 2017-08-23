@@ -23,14 +23,12 @@ export class ProjectCmp implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private http: Http,
-              private projectAction: ProjectAction,
               private projectService: ProjectService) {
   }
 
   public ngOnInit() {
     this.projectId = +(this.route.snapshot.paramMap.get('id') || 1);
 
-    this.projectAction.loadProjects();
     this.projects$ = this.projectService.getProjects();
     this.subscription.add(this.projectService
       .getProjectById(this.projectId)

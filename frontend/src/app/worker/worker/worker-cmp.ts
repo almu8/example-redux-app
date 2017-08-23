@@ -37,9 +37,6 @@ export class WorkerCmp {
       .filter(worker => !_.isEmpty(worker))
       .switchMap((worker: Worker) => {
         this.worker = worker;
-        if (this.worker.contactId) {
-          this.contactAction.loadContact(this.worker.contactId);
-        }
 
         return this.contactService.getContactById(worker.id);
       })
@@ -47,8 +44,6 @@ export class WorkerCmp {
         console.log("contact " + contact);
         this.contact = contact;
       }));
-
-    console.log("workerId " + this.workerId);
   }
 
   public ngOnDestroy() {

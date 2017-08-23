@@ -58,6 +58,18 @@ app.get('/contact', function (req, res) {
     res.send(contacts.find(c => c.id === id));
 });
 
+app.get('/worker', function (req, res) {
+    var id = +req.query.id;
+    var worker = workers.find(w => w.id === id);
+
+    if (worker) {
+        var contact = contacts.find(c => c.id === worker.contactId);
+        worker.contact = contact;
+    }
+
+    res.send(worker);
+});
+
 app.get('/projects', function (req, res) {
     var ps = cloneDeep(projects);
     ps.forEach(project => {

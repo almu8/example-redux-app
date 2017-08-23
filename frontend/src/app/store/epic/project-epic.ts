@@ -15,7 +15,7 @@ export class ProjectEpic {
 
     return action$.ofType(PROJECT_ACTION_NAMES.LOAD_PROJECTS)
       .switchMap(() => this.http.get(getProjectsUrl).catch(this.handleError))
-      .map((res: any) => {return res.json()})
+      .map((res: any) => res.json())
       .flatMap(this.handleProjectsLoad);
   };
 

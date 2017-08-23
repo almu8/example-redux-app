@@ -3,7 +3,7 @@ import {Http} from "@angular/http";
 import {Observable} from "rxjs";
 import * as _ from "lodash";
 
-import {CONTACT_ACTION_NAMES, ERROR_ACTION_NAMES, PROJECT_ACTION_NAMES, WORKER_ACTION_NAMES} from "../actions";
+import {CONTACT_ACTION_NAMES, ERROR_ACTION_NAMES} from "../actions";
 import {getContactUrl} from "../../urls";
 import {Contact} from "../../models/contact";
 
@@ -15,7 +15,7 @@ export class ContactEpic {
 
     return action$.ofType(CONTACT_ACTION_NAMES.LOAD_CONTACT)
       .switchMap(({ payload }) => this.http.get(getContactUrl, {params: {id: payload}}).catch(this.handleError))
-      .map((res: any) => {return res.json()})
+      .map((res: any) => res.json())
       .flatMap(this.handleContactLoad);
   };
 
