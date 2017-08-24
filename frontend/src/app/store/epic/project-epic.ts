@@ -5,7 +5,7 @@ import * as _ from "lodash";
 
 import {ERROR_ACTION_NAMES, PROJECT_ACTION_NAMES, WORKER_ACTION_NAMES} from "../actions";
 import {Project} from "../../models/project";
-import {getProjectsUrl} from "../../urls";
+import {getProjectsUrl, getProjectUrl} from "../../urls";
 
 @Injectable()
 export class ProjectEpic {
@@ -19,15 +19,32 @@ export class ProjectEpic {
       .flatMap(this.handleProjectsLoad);
   };
 
-  private handleProjectsLoad(projects: Project[]) {
-    let workers = _.flatMap(projects, p => p.workers);
-    _.each(projects, p => p.workers = _.map(p.workers, w => w.id));
+  public getProject = (action$: any) => {
+    return action$.ofType(PROJECT_ACTION_NAMES.LOAD_PROJECT)
+      .switchMap(({ payload }) => this.http.get(getProjectUrl, {params: {id: payload}}).catch(this.handleError))
+      .map((res: any) => res.json())
+      .flatMap(this.handleProjectLoad);
+  };
+
+  private handleProjectLoad(project: Project) {
+    let workers = project.workers;
+    project.workers = _.map(workers, w => w.id)
 
     return Observable.from([
       {
         type: WORKER_ACTION_NAMES.SET_WORKERS,
         payload: workers
       },
+      {
+        type: PROJECT_ACTION_NAMES.SET_PROJECTS,
+        payload: [project]
+      }
+    ])
+  }
+
+  private handleProjectsLoad(projects: Project[]) {
+
+    return Observable.from([
       {
         type: PROJECT_ACTION_NAMES.SET_PROJECTS,
         payload: projects

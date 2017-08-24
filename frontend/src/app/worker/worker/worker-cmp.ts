@@ -41,7 +41,6 @@ export class WorkerCmp {
         return this.contactService.getContactById(worker.id);
       })
       .subscribe((contact: Contact) => {
-        console.log("contact " + contact);
         this.contact = contact;
       }));
   }

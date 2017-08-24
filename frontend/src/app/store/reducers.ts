@@ -3,7 +3,7 @@ import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
 
 import {projectReducer} from "./reducer/project-reducer";
-import {workerReducer} from "./reducer/workerReducer";
+import {workerReducer} from "./reducer/worker-reducer";
 import {errorReducer} from "./reducer/error-reducer";
 import {contactReducer} from "./reducer/contact-reducer";
 

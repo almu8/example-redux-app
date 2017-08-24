@@ -44,23 +44,17 @@ var projects = [
 ];
 
 app.post('/approve', function (req, res) {
-    console.log("approved!!!");
     res.send("approved");
 });
 
 app.get('/workers', function (req, res) {
-    res.send(workers);
-});
-
-app.get('/contact', function (req, res) {
-    var id = +req.query.id;
-
-    res.send(contacts.find(c => c.id === id));
+    var projId = +req.query.projId;
+    res.send(workers.filter(w => w.projects.includes(projId)));
 });
 
 app.get('/worker', function (req, res) {
     var id = +req.query.id;
-    var worker = workers.find(w => w.id === id);
+    var worker = cloneDeep(workers).find(w => w.id === id);
 
     if (worker) {
         var contact = contacts.find(c => c.id === worker.contactId);
@@ -70,19 +64,41 @@ app.get('/worker', function (req, res) {
     res.send(worker);
 });
 
+app.get('/contact', function (req, res) {
+    var id = +req.query.id;
+
+    res.send(contacts.find(c => c.id === id));
+});
+
 app.get('/projects', function (req, res) {
-    var ps = cloneDeep(projects);
-    ps.forEach(project => {
-        let workerList = [];
+    // var ps = cloneDeep(projects);
+    // ps.forEach(project => {
+    //     let workerList = [];
+    //
+    //     project.workers.forEach(workerId => {
+    //         workerList.push(workers.find(worker => worker.id == workerId));
+    //     });
+    //
+    //     project.workers = workerList;
+    // });
 
-        project.workers.forEach(workerId => {
-            workerList.push(workers.find(worker => worker.id == workerId));
-        });
+    res.send(projects);
+});
 
-        project.workers = workerList;
+app.get('/project', function (req, res) {
+    var id = +req.query.id;
+
+    var p = cloneDeep(projects).find(p => p.id === id);
+
+    let workerList = [];
+
+    p.workers.forEach(workerId => {
+        workerList.push(workers.find(w => w.id == workerId));
     });
 
-    res.send(ps);
+    p.workers = workerList;
+
+    res.send(p);
 });
 
 // finally, let's start our server...

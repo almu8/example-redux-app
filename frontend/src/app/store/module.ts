@@ -19,10 +19,11 @@ import {ContactEpic} from "./epic/contact-epic";
 import {ProjectResolver} from "./resolver/project-resolver";
 import {WorkerResolver} from "./resolver/worker-resolver";
 import {WorkerEpic} from "./epic/worker-epic";
+import {ProjectListResolver} from "./resolver/project-list-resolver";
 
 @NgModule({
   imports: [NgReduxModule, NgReduxRouterModule],
-  providers: [RootEpics, ProjectEpic, ContactEpic, ProjectResolver, WorkerResolver, WorkerEpic],
+  providers: [RootEpics, ProjectEpic, ContactEpic, ProjectResolver, WorkerResolver, WorkerEpic, ProjectListResolver],
 })
 export class StoreModule {
   constructor(

@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import * as _ from "lodash";
 
 import {CONTACT_ACTION_NAMES, ERROR_ACTION_NAMES, PROJECT_ACTION_NAMES, WORKER_ACTION_NAMES} from "../actions";
-import {getWorkerUrl} from "../../urls";
+import {getWorkerUrl, getWorkersUrl} from "../../urls";
 import {Contact} from "../../models/contact";
 import {Worker} from "../../models/worker";
 
@@ -19,6 +19,23 @@ export class WorkerEpic {
       .map((res: any) => res.json())
       .flatMap(this.handleWorkerLoad);
   };
+
+  public getWorkers = (action$: any) => {
+
+    return action$.ofType(WORKER_ACTION_NAMES.LOAD_WORKERS)
+      .switchMap(({ payload }) => this.http.get(getWorkersUrl, {params: {projId: payload}}).catch(this.handleError))
+      .map((res: any) => res.json())
+      .flatMap(this.handleWorkersLoad);
+  };
+
+  private handleWorkersLoad(workers: Worker[]) {
+    return Observable.from([
+      {
+        type: WORKER_ACTION_NAMES.SET_WORKERS,
+        payload: workers
+      }
+    ])
+  }
 
   private handleWorkerLoad(worker: Worker) {
     let contact: Contact = worker.contact;

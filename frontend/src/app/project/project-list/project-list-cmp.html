@@ -1,0 +1,8 @@
+<div>
+  <h2>Projects:</h2>
+  <a *ngFor="let p of projects$ | async"
+     style="margin: 10px"
+     [routerLink]="['/project', p.id]">
+    {{p.name}}
+  </a>
+</div>

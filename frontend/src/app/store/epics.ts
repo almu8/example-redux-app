@@ -14,7 +14,9 @@ export class RootEpics {
   public createEpics() {
     return [
       createEpicMiddleware(this.projectEpic.getProjects),
+      createEpicMiddleware(this.projectEpic.getProject),
       createEpicMiddleware(this.contactEpic.getContact),
+      createEpicMiddleware(this.workerEpic.getWorkers),
       createEpicMiddleware(this.workerEpic.getWorker)
     ];
   }

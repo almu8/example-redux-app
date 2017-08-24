@@ -4,9 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Http} from "@angular/http";
 import {Subscription} from "rxjs/Subscription";
 
-import {Project} from "../models/project";
-import {ProjectAction} from "../store/action/project-action";
-import {ProjectService} from "../store/service/project-service";
+import {Project} from "../../models/project";
+import {ProjectService} from "../../store/service/project-service";
 
 
 
@@ -16,7 +15,6 @@ import {ProjectService} from "../store/service/project-service";
 export class ProjectCmp implements OnInit, OnDestroy {
   private projectId: number;
 
-  public projects$: Observable<Project[]>;
   public project: Project;
 
   private subscription: Subscription = new Subscription();
@@ -29,7 +27,6 @@ export class ProjectCmp implements OnInit, OnDestroy {
   public ngOnInit() {
     this.projectId = +(this.route.snapshot.paramMap.get('id') || 1);
 
-    this.projects$ = this.projectService.getProjects();
     this.subscription.add(this.projectService
       .getProjectById(this.projectId)
       .subscribe((project: Project) => this.project = project));
@@ -42,7 +39,7 @@ export class ProjectCmp implements OnInit, OnDestroy {
   public approve() {
     console.log("approved project " + this.projectId);
 
-    this.http.post("http://localhost:3000/approve", null)
+    this.http.post("http://localhost:3000/approve",  null)
       .forEach(() => {});
   }
 }
