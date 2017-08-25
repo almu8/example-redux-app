@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import * as _ from "lodash";
 
 import {CONTACT_ACTION_NAMES, ERROR_ACTION_NAMES, PROJECT_ACTION_NAMES, WORKER_ACTION_NAMES} from "../actions";
-import {getWorkerUrl, getWorkersUrl} from "../../urls";
+import {getWorkerUrl, getWorkersUrl} from "../../http/urls";
 import {Contact} from "../../models/contact";
 import {Worker} from "../../models/worker";
 

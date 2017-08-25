@@ -5,7 +5,7 @@ import * as _ from "lodash";
 
 import {ERROR_ACTION_NAMES, PROJECT_ACTION_NAMES, WORKER_ACTION_NAMES} from "../actions";
 import {Project} from "../../models/project";
-import {getProjectsUrl, getProjectUrl} from "../../urls";
+import {getProjectsUrl, getProjectUrl} from "../../http/urls";
 
 @Injectable()
 export class ProjectEpic {

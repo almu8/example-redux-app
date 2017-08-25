@@ -13,7 +13,7 @@ import { StoreModule } from './store/module';
 import { appRoutes } from './routes';
 import { AppComponent } from './component';
 import {ProjectModule} from "./project/project-module";
-import {InterceptedHttp} from "./interceptor/intercepter-http";
+import {InterceptedHttp} from "./http/interceptor/intercepter-http";
 
 @NgModule({
   declarations: [AppComponent],

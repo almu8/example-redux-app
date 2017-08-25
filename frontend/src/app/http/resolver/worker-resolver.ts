@@ -4,9 +4,9 @@ import * as _ from "lodash";
 
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Worker} from "../../models/worker";
-import {ContactAction} from "../action/contact-action";
-import {WorkerService} from "../service/worker-service";
-import {WorkerAction} from "../action/worker-action";
+import {ContactAction} from "../../store/action/contact-action";
+import {WorkerService} from "../../store/service/worker-service";
+import {WorkerAction} from "../../store/action/worker-action";
 
 @Injectable()
 export class WorkerResolver implements Resolve<Worker> {

@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import * as _ from "lodash";
 
 import {CONTACT_ACTION_NAMES, ERROR_ACTION_NAMES} from "../actions";
-import {getContactUrl} from "../../urls";
+import {getContactUrl} from "../../http/urls";
 import {Contact} from "../../models/contact";
 
 @Injectable()
