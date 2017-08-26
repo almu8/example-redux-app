@@ -1,15 +1,12 @@
-import {Component, ChangeDetectionStrategy, Input, SimpleChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
-import { select, select$ } from '@angular-redux/store';
-import { Observable } from 'rxjs/Observable';
 import * as _ from "lodash";
 
 import {Worker} from "../../models/worker";
 import {Contact} from "../../models/contact";
 import {WorkerService} from "../../store/service/worker-service";
 import {ContactService} from "../../store/service/contact-service";
-import {ContactAction} from "../../store/action/contact-action";
 
 
 @Component({
@@ -25,8 +22,7 @@ export class WorkerCmp {
 
   constructor(private route: ActivatedRoute,
               private workerService: WorkerService,
-              private contactService: ContactService,
-              private contactAction: ContactAction) {
+              private contactService: ContactService) {
   }
 
   public ngOnInit(){
@@ -47,9 +43,5 @@ export class WorkerCmp {
 
   public ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  public click() {
-    console.log("!!!!!!!!!!" + JSON.stringify(this.contact));
   }
 }

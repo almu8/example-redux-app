@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import {Http, HttpModule, RequestOptions, XHRBackend} from '@angular/http';
+import {Router, RouterModule} from '@angular/router';
+import {HttpModule, RequestOptions, XHRBackend} from '@angular/http';
 import { NgReduxModule } from '@angular-redux/store';
 import { NgReduxRouterModule } from '@angular-redux/router';
 
@@ -13,7 +13,8 @@ import { StoreModule } from './store/module';
 import { appRoutes } from './routes';
 import { AppComponent } from './component';
 import {ProjectModule} from "./project/project-module";
-import {InterceptedHttp} from "./http/interceptor/intercepter-http";
+import {InterceptedHttp} from "./http/intercepter-http";
+import {FilterModule} from "./http/filter-module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,18 +27,8 @@ import {InterceptedHttp} from "./http/interceptor/intercepter-http";
     NgReduxRouterModule,
     StoreModule,
     ProjectModule,
+    FilterModule
   ],
-  bootstrap: [AppComponent],
-  providers: [
-    {
-      provide: Http,
-      useFactory: httpFactory,
-      deps: [XHRBackend, RequestOptions]
-    }
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
-  return new InterceptedHttp(xhrBackend, requestOptions);
-}

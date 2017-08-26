@@ -4,5 +4,5 @@ export interface Project {
   id: number;
   name: string;
   description: string;
-  workers: Worker[] | number[];
+  workers: any;
 }

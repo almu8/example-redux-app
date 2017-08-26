@@ -5,6 +5,7 @@ import * as _ from "lodash";
 
 import {ERROR_ACTION_NAMES, PROJECT_ACTION_NAMES, WORKER_ACTION_NAMES} from "../actions";
 import {Project} from "../../models/project";
+import {Worker} from "../../models/worker";
 import {getProjectsUrl, getProjectUrl} from "../../http/urls";
 
 @Injectable()
@@ -28,7 +29,7 @@ export class ProjectEpic {
 
   private handleProjectLoad(project: Project) {
     let workers = project.workers;
-    project.workers = _.map(workers, w => w.id)
+    project.workers = _.map(workers, (w: Worker) => w.id);
 
     return Observable.from([
       {
