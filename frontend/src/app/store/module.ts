@@ -1,29 +1,34 @@
 import { NgModule } from '@angular/core';
-
-// Angular-redux ecosystem stuff.
-// @angular-redux/form and @angular-redux/router are optional
-// extensions that sync form and route location state between
-// our store and Angular.
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { NgReduxRouterModule, NgReduxRouter } from '@angular-redux/router';
 import { provideReduxForms } from '@angular-redux/form';
-
-// Redux ecosystem stuff.
 import { createLogger } from 'redux-logger';
 
-// The top-level reducers and epics that make up our app's logic.
 import { rootReducer } from './reducers';
 import { RootEpics } from './epics';
 import {ProjectEpic} from "./epic/project-epic";
 import {ContactEpic} from "./epic/contact-epic";
+import {WorkerEpic} from "./epic/worker-epic";
+import {CountryEpic} from "./epic/country-epic";
+import {CityEpic} from "./epic/city-epic";
 import {ProjectResolver} from "../http/resolver/project-resolver";
 import {WorkerResolver} from "../http/resolver/worker-resolver";
-import {WorkerEpic} from "./epic/worker-epic";
 import {ProjectListResolver} from "../http/resolver/project-list-resolver";
+
 
 @NgModule({
   imports: [NgReduxModule, NgReduxRouterModule],
-  providers: [RootEpics, ProjectEpic, ContactEpic, ProjectResolver, WorkerResolver, WorkerEpic, ProjectListResolver],
+  providers: [
+    RootEpics,
+    ProjectEpic,
+    ContactEpic,
+    WorkerEpic,
+    CountryEpic,
+    CityEpic,
+    ProjectResolver,
+    WorkerResolver,
+    ProjectListResolver
+  ]
 })
 export class StoreModule {
   constructor(

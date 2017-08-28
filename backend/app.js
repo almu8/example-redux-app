@@ -43,6 +43,24 @@ var projects = [
     }
 ];
 
+var countries = [
+    {id:1, name: "Russia"},
+    {id:2, name: "Belarus"},
+    {id:3, name: "USA"}
+];
+
+var cities = [
+    {id:1, name: "Moscow", countryId:1},
+    {id:2, name: "Saint Petersburg", countryId:1},
+    {id:3, name: "Kazan", countryId:1},
+    {id:4, name: "Novosibirsk", countryId:1},
+    {id:5, name: "Brest", countryId:2},
+    {id:6, name: "Minsk", countryId:2},
+    {id:7, name: "Los Angeles", countryId:3},
+    {id:8, name: "Chicago", countryId:3},
+    {id:9, name: "Washington", countryId:3}
+];
+
 app.post('/approve', function (req, res) {
     res.send("approved");
 });
@@ -50,6 +68,11 @@ app.post('/approve', function (req, res) {
 app.get('/workers', function (req, res) {
     var projId = +req.query.projId;
     res.send(workers.filter(w => w.projects.includes(projId)));
+});
+
+app.get('/cities', function (req, res) {
+    var countryId = +req.query.countryId;
+    res.send(cities.filter(c => c.countryId === countryId));
 });
 
 app.get('/worker', function (req, res) {
@@ -71,18 +94,12 @@ app.get('/contact', function (req, res) {
 });
 
 app.get('/projects', function (req, res) {
-    // var ps = cloneDeep(projects);
-    // ps.forEach(project => {
-    //     let workerList = [];
-    //
-    //     project.workers.forEach(workerId => {
-    //         workerList.push(workers.find(worker => worker.id == workerId));
-    //     });
-    //
-    //     project.workers = workerList;
-    // });
-
     res.send(projects);
+});
+
+
+app.get('/countries', function (req, res) {
+    res.send(countries);
 });
 
 app.get('/project', function (req, res) {

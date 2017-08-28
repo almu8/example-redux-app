@@ -1,0 +1,15 @@
+<div>
+  <h2>Countries:</h2>
+  <select (change)="countryChange(+$event.target.value)">
+    <option></option>
+    <option [value]="c.id"
+            *ngFor="let c of countries$ | async">{{c.name}}</option>
+  </select>
+</div>
+<div *ngIf="cities$">
+  <h2>Cities:</h2>
+  <div *ngFor="let c of cities$ | async">
+    {{c.name}}
+    <br>
+  </div>
+</div>

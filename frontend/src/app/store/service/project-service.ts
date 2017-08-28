@@ -15,6 +15,6 @@ export class ProjectService {
   }
 
   public getProjectById(id: number): Observable<Project> {
-    return this.projects$.map(projects => _.find(projects, p => p.id === id));
+    return this.projects$.map(projects => <Project>_.find(projects, p => p.id === id));
   }
 }

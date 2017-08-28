@@ -23,9 +23,10 @@ export class WorkerResolver implements Resolve<Worker> {
     let subscription: Subscription = new Subscription();
     subscription.add(this.workerService
       .getWorkerById(workerId)
-      .filter(worker => !_.isEmpty(worker)) //TODO what will happen if the worker does not come at once, but comes later ????
+      .filter(worker => !_.isEmpty(worker))
       .delay(1)
       .do((worker: Worker) => {
+
         if (worker.contactId) {
           this.contactAction.loadContact(worker.contactId);
         }
